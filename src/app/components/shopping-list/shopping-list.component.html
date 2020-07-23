@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit($event, form)" #form="ngForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            [(ngModel)]="item.name"
+            [ngClass]="{ 'is-invalid': itemName.errors && itemName.touched }"
+            name="name"
+            #itemName="ngModel"
+            required
+            minlength="2"
+          />
+          <!-- <div class="invalid-feedback" [hidden]="itemName.valid">Item name required</div> -->
+          <div class="invalid-feedback" [hidden]="!itemName.errors?.required">
+            Item name required
+          </div>
+          <div class="invalid-feedback" [hidden]="!itemName.errors?.minlength">
+            Item name must be at least 2 chars
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="count">Count</label>
+          <input
+            type="number"
+            id="count"
+            min="1"
+            class="form-control"
+            [(ngModel)]="item.count"
+            [ngClass]="{ 'is-invalid': itemCount.errors && itemCount.touched }"
+            name="count"
+            #itemCount="ngModel"
+            min="1"
+            required
+            pattern="[0-9]"
+          />
+          <div class="invalid-feedback" [hidden]="!itemCount.errors?.required">
+            Item count required
+          </div>
+          <div class="invalid-feedback" [hidden]="!itemCount.errors?.minlength">
+            Item count must be at least 2 chars
+          </div>
+          <div class="invalid-feedback" [hidden]="!itemCount.errors?.pattern">
+            Item count must be at least 2 chars
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add</button>
+      </form>
+    </div>
+  </div>
+  <div class="alert alert-info mb-3">Item name: {{ item.name || n / a }}</div>
+  <div class="alert alert-info mb-3">Item name: {{ item.count || n / a }}</div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let item of shoppingList">
+      {{ item.name }}
+    </li>
+  </ul>
+</div>

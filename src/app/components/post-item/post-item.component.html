@@ -1,0 +1,19 @@
+<div class="card mb-3" [ngClass]="{'bg-light border-dark': postItem.id === editPostId}">
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ postItem.title }}
+    </h5>
+    <p class="card-text">
+      {{ postItem.body }}
+    </p>
+    <button class="btn btn-danger" (click)="onDelete(postItem.id)">
+      Delete
+    </button>
+    <button class="btn btn-info ml-3" (click)="onEdit(postItem)" *ngIf="!editPostId">
+      Edit
+    </button>
+    <button class="btn btn-dark ml-3" (click)="onCancel()" *ngIf="editPostId">
+      Cancel
+    </button>
+  </div>
+</div>
